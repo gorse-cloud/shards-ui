@@ -9,9 +9,9 @@
     "copy-images": "copyfiles -u 3 src/extras/images/**/**/**/* dist/images/",
     "css": "npm-run-all css-compile css-prefix css-minify && npm run bundlesize",
     "css-compile": "npm-run-all css-compile:main css-compile:extras css-compile:demo",
-    "css-compile:demo": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 src/extras/scss/shards-demo.scss dist/css/shards-demo.css",
-    "css-compile:extras": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 src/extras/scss/shards-extras.scss dist/css/shards-extras.css",
-    "css-compile:main": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 src/scss/shards.scss dist/css/shards.css",
+    "css-compile:demo": "sass --load-path=. --style=expanded --source-map --embed-sources src/extras/scss/shards-demo.scss dist/css/shards-demo.css",
+    "css-compile:extras": "sass --load-path=. --style=expanded --source-map --embed-sources src/extras/scss/shards-extras.scss dist/css/shards-extras.css",
+    "css-compile:main": "sass --load-path=. --style=expanded --source-map --embed-sources src/scss/shards.scss dist/css/shards.css",
     "css-minify": "npm-run-all css-minify:main css-minify:extras css-minify:demo",
     "css-minify:demo": "cleancss --level 1 --source-map --source-map-inline-sources --output dist/css/shards-demo.min.css dist/css/shards-demo.css",
     "css-minify:extras": "cleancss --level 1 --source-map --source-map-inline-sources --output dist/css/shards-extras.min.css dist/css/shards-extras.css",
@@ -60,11 +60,11 @@
     "bundlesize": "^0.18.0",
     "clean-css-cli": "^4.1.11",
     "copyfiles": "^1.2.0",
-    "node-sass": "^4.9.3",
     "nodemon": "^1.18.4",
     "nouislider": "^11.1.0",
     "npm-run-all": "^4.1.2",
-    "postcss-cli": "^6.1.2",
+    "postcss-cli": "^7.1.2",
+    "sass": "1.78.0",
     "sass-lint": "^1.12.1",
     "sass-unused": "^0.2.2",
     "uglify-js": "^3.3.23",
@@ -72,5 +72,10 @@
   },
   "dependencies": {
     "bootstrap": "4.3.1"
+  },
+  "overrides": {
+    "bundlesize": {
+      "brotli-size": "4.0.0"
+    }
   }
 }
