@@ -37,13 +37,13 @@
 
   // Small card modifier.
   &-small {
+    box-shadow: $card-small-box-shadow;
+
     .card-header,
     .card-body,
     .card-footer {
       padding: $card-small-spacer-y $card-small-spacer-x;
     }
-
-    box-shadow: $card-small-box-shadow;
   }
 }
 
@@ -61,7 +61,7 @@
 }
 
 .card-subtitle {
-  margin-top: -($card-spacer-y / 2);
+  margin-top: ($card-spacer-y * -.5);
 }
 
 .card-link {
@@ -112,8 +112,8 @@
 }
 
 .card-header-pills {
-  margin-right: -($card-spacer-x / 2);
-  margin-left: -($card-spacer-x / 2);
+  margin-right: ($card-spacer-x * -.5);
+  margin-left: ($card-spacer-x * -.5);
 
   &:hover {
     background: transparent;

@@ -34,19 +34,19 @@
 // Override alert theme colors without mixin.
 @each $color, $value in $theme-colors {
   .alert-#{$color} {
-    color: lighten($value, 48%);
-    background-color: $value;
-
-    .alert-link {
+    @if $color == "light" {
+      color: color-yiq($value);
+    } @else {
       color: lighten($value, 48%);
     }
 
-    // Exception for alerts with a light background.
-    @if $color == "light" {
-      color: color-yiq($value);
+    background-color: $value;
 
-      .alert-link {
+    .alert-link {
+      @if $color == "light" {
         color: color-yiq($value);
+      } @else {
+        color: lighten($value, 48%);
       }
     }
   }

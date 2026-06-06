@@ -78,7 +78,10 @@
 // White outline buttons
 .btn-outline-white {
   @include button-outline-variant($white);
-  color: $white;
+
+  & {
+    color: $white;
+  }
 
   &:not(:disabled):not(.disabled):active,
   &:not(:disabled):not(.disabled).active {
@@ -89,7 +92,10 @@
 // Black outline buttons
 .btn-outline-black {
   @include button-outline-variant($black);
-  color: $black;
+
+  & {
+    color: $black;
+  }
 
   &:not(:disabled):not(.disabled):active,
   &:not(:disabled):not(.disabled).active {

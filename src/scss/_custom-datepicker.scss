@@ -2,12 +2,11 @@
 
 .datepicker {
   border-radius: $datepicker-border-radius;
+  direction: ltr;
 
 	&-inline {
 		width: 220px;
   }
-
-  direction: ltr;
 
 	&-rtl {
     direction: rtl;
