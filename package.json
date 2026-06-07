@@ -1,5 +1,5 @@
 {
-  "name": "shards-ui",
+  "name": "@gorse/shards-ui",
   "description": "A free, modern and lightweight Bootstrap 4 UI toolkit for web makers.",
   "version": "3.0.0",
   "main": "dist/js/shards",

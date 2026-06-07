@@ -9,11 +9,11 @@ A modern UI kit packed with 2 custom page templates and 11 extra <br />custom co
 <br />
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/shards-ui">
-    <img src="https://img.shields.io/npm/v/shards-ui.svg" alt="`npm` version"/>
+  <a href="https://www.npmjs.com/package/@gorse/shards-ui">
+    <img src="https://img.shields.io/npm/v/@gorse/shards-ui.svg" alt="`npm` version"/>
   </a>
-  <a href="https://www.npmjs.com/package/shards-ui">
-    <img src="https://img.shields.io/npm/dm/shards-ui.svg" alt="`npm` downloads"/>
+  <a href="https://www.npmjs.com/package/@gorse/shards-ui">
+    <img src="https://img.shields.io/npm/dm/@gorse/shards-ui.svg" alt="`npm` downloads"/>
   </a>
   <a href="#">
     <img src="https://img.shields.io/badge/Size-14.05_kb_min/gz-brightgreen.svg" />
@@ -54,14 +54,14 @@ Currently there are only three ways of downloading Shards:
 
 * [Official Website](https://designrevision.com/download/shards)
 * [Release Package](https://github.com/DesignRevision/shards-ui/releases)
-* [`npm`](https://www.npmjs.com/package/shards-ui)
+* [`npm`](https://www.npmjs.com/package/@gorse/shards-ui)
 
-The distributed Shards assets are also available via CDN through [unpkg](https://unpkg.com/shards-ui@latest/) and [jsDelivr](https://cdn.jsdelivr.net/npm/shards-ui@latest/).
+The distributed Shards assets are also available via CDN through [unpkg](https://unpkg.com/@gorse/shards-ui@latest/) and [jsDelivr](https://cdn.jsdelivr.net/npm/@gorse/shards-ui@latest/).
 
 To install with `npm`:
 
 ```bash
-npm install --save shards-ui bootstrap
+npm install --save @gorse/shards-ui bootstrap
 ```
 
 <br />
@@ -87,7 +87,7 @@ In order to take advantage of both Bootstrap and Shards' features you may want t
 
     <!-- CSS Dependencies -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://unpkg.com/shards-ui@latest/dist/css/shards.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/@gorse/shards-ui@latest/dist/css/shards.min.css">
   </head>
   <body>
     <h1>Hello, world!</h1>
@@ -97,7 +97,7 @@ In order to take advantage of both Bootstrap and Shards' features you may want t
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
+    <script src="https://unpkg.com/@gorse/shards-ui@latest/dist/js/shards.min.js"></script>
   </body>
 </html>
 ```
@@ -111,14 +111,14 @@ If you're using a bundler like [`webpack`](https://webpack.js.org) (with [`style
 ```javascript
 // app.js
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'shards-ui/dist/css/shards.min.css';
+import '@gorse/shards-ui/dist/css/shards.min.css';
 // Optional JavaScript
 // JavaScript Dependencies: jQuery, Popper.js, Bootstrap JS, Shards JS
 // Install them with `npm` as well
 import 'jquery/dist/jquery.slim.min';
 import 'popper.js/dist/umd/popper.min';
 import 'bootstrap/dist/js/bootstrap.min';
-import 'shards-ui/dist/js/shards.min';
+import '@gorse/shards-ui/dist/js/shards.min';
 ```
 
 <br/>
