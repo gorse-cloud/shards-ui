@@ -1,0 +1,101 @@
+name: Publish to npm
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - package.json
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: Publish package
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+
+      - name: Check package version change
+        id: version
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          package_name="$(node -p "require('./package.json').name")"
+          current_version="$(node -p "require('./package.json').version")"
+
+          echo "package_name=${package_name}" >> "$GITHUB_OUTPUT"
+          echo "current_version=${current_version}" >> "$GITHUB_OUTPUT"
+
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "Manual publish requested for ${package_name}@${current_version}."
+            exit 0
+          fi
+
+          before_sha="${{ github.event.before }}"
+
+          if ! git cat-file -e "${before_sha}:package.json" 2>/dev/null; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No previous package.json was found to compare against."
+            exit 0
+          fi
+
+          previous_version="$(
+            git show "${before_sha}:package.json" |
+              node -e "let input = ''; process.stdin.on('data', chunk => input += chunk); process.stdin.on('end', () => console.log(JSON.parse(input).version));"
+          )"
+
+          echo "previous_version=${previous_version}" >> "$GITHUB_OUTPUT"
+
+          if [[ "${current_version}" == "${previous_version}" ]]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Package version did not change: ${current_version}."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "Package version changed: ${previous_version} -> ${current_version}."
+          fi
+
+      - name: Check whether npm version already exists
+        id: npm
+        if: steps.version.outputs.changed == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          package_ref="${{ steps.version.outputs.package_name }}@${{ steps.version.outputs.current_version }}"
+
+          if npm view "${package_ref}" version >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "${package_ref} already exists on npm. Skipping publish."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "${package_ref} is not published yet."
+          fi
+
+      - name: Install dependencies
+        if: steps.version.outputs.changed == 'true' && steps.npm.outputs.exists == 'false'
+        run: npm ci
+
+      - name: Validate package contents
+        if: steps.version.outputs.changed == 'true' && steps.npm.outputs.exists == 'false'
+        run: npm pack --dry-run
+
+      - name: Publish to npm
+        if: steps.version.outputs.changed == 'true' && steps.npm.outputs.exists == 'false'
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

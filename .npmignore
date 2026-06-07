@@ -10,6 +10,7 @@ node_modules
 .npmignore
 
 # Repo related files
+/.github
 /logo.png
 /ATTRIB.md
 /CHANGELOG.md
